@@ -1,0 +1,18 @@
+export const categories = [
+  "All",
+  "JavaScript",
+  "TypeScript",
+  "Programming",
+  "All",
+  "JavaScript",
+  "TypeScript",
+  "Programming",
+  "All",
+  "JavaScript",
+  "TypeScript",
+  "Programming",
+  "All",
+  "JavaScript",
+  "TypeScript",
+  "Programming",
+];
