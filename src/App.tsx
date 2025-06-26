@@ -18,7 +18,7 @@ function App() {
       <div className="grid grid-cols-[auto_1fr] flex-grow overflow-auto">
         <div>SIDE BAR</div>
         <div className="overflow-x-hidden px-8 pb-4">
-          <div className="sticky top-0 bg-white z-10 pb-4">
+          <div className="sticky top-0 bg-white z-10 pb-4 ">
             <CategoryChips categories={categories} selectedCategory={selectedCategory} onSelect={onSelect} />
           </div></div>
       </div>
