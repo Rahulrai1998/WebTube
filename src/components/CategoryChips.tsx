@@ -44,12 +44,11 @@ const CategoryChips = ({ categories, selectedCategory, onSelect }: CategoryChips
                 let newTranslate = translate + TRANSLATE_PIXELS
                 const scrollWidth = containerRef.current.scrollWidth
                 const viewWidth = containerRef.current.clientWidth
-                console.log("TEST", scrollWidth, " ", viewWidth, newTranslate, viewWidth + newTranslate, translate)
+                // console.log("TEST", scrollWidth, " ", viewWidth, newTranslate, viewWidth + newTranslate, translate)
                 if (newTranslate + viewWidth >= scrollWidth) return scrollWidth - viewWidth
                 return newTranslate
             } else return translate
         })
-
     }
 
     return (
