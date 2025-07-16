@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from "../assets/webtube-logo.png"
+import logo from "../assets/mytube-logo-sm.png"
 import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from 'lucide-react'
 import Button from '../components/Button'
 
