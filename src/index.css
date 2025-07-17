@@ -4,7 +4,7 @@
   --color-secondary-default: oklch(0.9303 0.003 247.858);
   --color-secondary-hover: oklch(0.968 0.007 247.896);
   --color-secondary-border: oklch(0.5415 0.022 252.894);
-  --color-secondary-text: oklch(0.869 0.022 252.894);
+  --color-secondary-text: oklch(0.5994 0.022 252.894);
   --color-secondary-dark: oklch(0.102 0.022 252.894);
   --color-secondary-dark-hover: oklch(0.2148 0.022 252.894);
 }
