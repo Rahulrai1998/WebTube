@@ -1,3 +1,4 @@
+import { formatDuration } from "../utils/formatDuration"
 
 
 type VideoGridItemProps = {
@@ -20,7 +21,7 @@ const VideoGridItem = ({ id, title, channel, views, postedAt, duration, thumbnai
         <a href={`/watch?v=${id}`} className="relative aspect-video">
             <img src={thumbnailUrl} alt="video thumbnail" className="block object-cover w-full h-full rounded-xl" />
 
-            <div className="absolute bottom-1 right-1 text-secondary-text text-small bg-secondary-dark rounded px-0.5">{duration}</div>
+            <div className="absolute bottom-1 right-1 text-secondary-text text-small bg-secondary-dark rounded px-0.5">{formatDuration(duration)}</div>
         </a>
     </div>
 }
