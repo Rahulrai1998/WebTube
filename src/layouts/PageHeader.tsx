@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import logo from "../assets/mytube-logo-sm.png"
 import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from 'lucide-react'
-import Button from '../components/Button'
+import Button, { buttonStyles } from '../components/Button'
 
 const PageHeader = () => {
     const [showFullWidthSearch, setShowFullWidthSearch] = useState(false)
-
+    console.log("params",buttonStyles())
     return (
         <div className='flex gap-10 lg:gap-20 justify-between pt-4 mb-6 mx-4'>
             <div className={`gap-4 items-center flex-shrink-0 ${showFullWidthSearch ? "hidden" : "flex"}`}>
