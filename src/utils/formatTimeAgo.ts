@@ -15,6 +15,7 @@ const DIVISIONS: DivisionsType[] = [
 ];
 
 export function formatTimeAgo(date: Date) {
+  console.log(date, " ", date.getTime());
   let duration = (date.getTime() - new Date().getTime()) / 1000;
 
   for (let i = 0; i < DIVISIONS.length; i++) {

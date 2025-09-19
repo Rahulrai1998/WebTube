@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { formatDuration } from "../utils/formatDuration";
 import { formatTimeAgo } from "../utils/formatTimeAgo";
 
@@ -28,8 +29,22 @@ const VideoGridItem = ({
     thumbnailUrl,
     videoUrl,
 }: VideoGridItemProps) => {
+
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+    const videoRef = useRef<HTMLVideoElement>(null)
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+        if (isVideoPlaying) {
+            videoRef.current.currentTime = 0
+            videoRef.current.play()
+        } else {
+            videoRef.current.pause()
+        }
+    }, [isVideoPlaying])
+
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2" onMouseEnter={() => setIsVideoPlaying(true)} onMouseLeave={() => setIsVideoPlaying(false)}>
             <a href={`/watch?v=${id}`} className="relative aspect-video">
                 <img
                     src={thumbnailUrl}
@@ -40,6 +55,7 @@ const VideoGridItem = ({
                 <div className="absolute bottom-1 right-1 text-secondary-text text-small bg-secondary-dark rounded px-0.5">
                     {formatDuration(duration)}
                 </div>
+                <video src={videoUrl} muted playsInline ref={videoRef} className="block  absolute inset-0" />
             </a>
             <div className="flex gap-2">
                 <a href={`/@${channel.id}`} className={"flex-shrink-0"}>
@@ -55,6 +71,7 @@ const VideoGridItem = ({
                     <div className="text-secondary-text text-sm">{VIEW_FORMATTER.format(views)} Views • {formatTimeAgo(postedAt)}</div>
                 </div>
             </div>
+
         </div>
     );
 };
