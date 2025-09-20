@@ -19,7 +19,25 @@ const SideBar = () => {
 
       <aside className="w-56 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2 px-2">
         <LargeSidebarSection>
-          <LargeSidebarItem />
+          <LargeSidebarItem isActive Icon={Home} title={"Home"} url="/" />
+          <LargeSidebarItem
+            isActive
+            Icon={Repeat}
+            title="Shorts"
+            url="/shorts"
+          />
+          <LargeSidebarItem
+            isActive
+            Icon={Clapperboard}
+            title="Subscriptions"
+            url="/subscriptions"
+          />
+          <LargeSidebarItem
+            isActive
+            Icon={Library}
+            title="Library"
+            url="/library"
+          />
         </LargeSidebarSection>
       </aside>
     </>
@@ -51,12 +69,39 @@ function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
 
 type LargeSidebarSectionProps = {
   children: ReactNode;
+  title?: string;
+  visibleItemCount?: number;
 };
 
 function LargeSidebarSection({ children }: LargeSidebarSectionProps) {
   return <>{children}</>;
 }
 
-function LargeSidebarItem() {
-  return <></>;
+type LargeSidebarItemProps = {
+  Icon: ElementType;
+  title: string;
+  url: string;
+  isActive: boolean;
+};
+
+function LargeSidebarItem({
+  Icon,
+  title,
+  url,
+  isActive,
+}: LargeSidebarItemProps) {
+  return (
+    <a
+      href={url}
+      className={twMerge(
+        buttonStyles({ variant: "ghost" }),
+        "w-full p-3 flex items-center rounded-lg , gap-4 justify-start"
+      )}
+    >
+      <Icon className="w-6 h-6" />
+      <div className="text-ellipsis whitespsace-nowrap overflow-hidden">
+        {title}
+      </div>
+    </a>
+  );
 }
