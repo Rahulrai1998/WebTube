@@ -1,7 +1,25 @@
-import { Clapperboard, Home, Library, Repeat } from "lucide-react";
-import React, { type ElementType, type JSX, type ReactNode } from "react";
-import { buttonStyles } from "../components/Button";
+import {
+  ChevronDown,
+  ChevronUp,
+  Clapperboard,
+  Clock,
+  History,
+  Home,
+  Library,
+  ListVideo,
+  PlaySquare,
+  Repeat,
+} from "lucide-react";
+import React, {
+  Children,
+  useState,
+  type ElementType,
+  type JSX,
+  type ReactNode,
+} from "react";
+import Button, { buttonStyles } from "../components/Button";
 import { twMerge } from "tailwind-merge";
+import { playlists } from "../data/sidebar";
 
 const SideBar = () => {
   return (
@@ -18,27 +36,41 @@ const SideBar = () => {
       </aside>
 
       <aside className="w-56 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2 px-2">
-        <LargeSidebarSection>
+        <LargeSidebarSection visibleItemCount={3}>
           <LargeSidebarItem isActive Icon={Home} title={"Home"} url="/" />
           <LargeSidebarItem
-            isActive
-            Icon={Repeat}
-            title="Shorts"
-            url="/shorts"
-          />
-          <LargeSidebarItem
-            isActive
             Icon={Clapperboard}
             title="Subscriptions"
             url="/subscriptions"
           />
-          <LargeSidebarItem
-            isActive
-            Icon={Library}
-            title="Library"
-            url="/library"
-          />
         </LargeSidebarSection>
+        <hr />
+
+        <LargeSidebarSection visibleItemCount={5}>
+          <LargeSidebarItem Icon={Library} title={"Library"} url="/library" />
+          <LargeSidebarItem Icon={History} title={"History"} url="/history" />
+          <LargeSidebarItem
+            Icon={PlaySquare}
+            title="Your Videos"
+            url="/your-videos"
+          />
+          <LargeSidebarItem
+            Icon={Clock}
+            title="Watch Later"
+            url="/watch-later"
+          />
+
+          {playlists?.map((playlist) => (
+            <LargeSidebarItem
+              key={playlist?.id}
+              Icon={ListVideo}
+              title={playlist?.name}
+              url={`/playlist?list=${playlist.id}`}
+            />
+          ))}
+        </LargeSidebarSection>
+
+        <hr />
       </aside>
     </>
   );
@@ -58,7 +90,7 @@ function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
       href={url}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
-        "py-4 px-0.5 flex flex-col items-center rounded-lg , gap-1"
+        "py-4 px-0.5 flex flex-col items-center rounded-lg  gap-1"
       )}
     >
       <Icon className="w-6 h-6" />
@@ -73,33 +105,63 @@ type LargeSidebarSectionProps = {
   visibleItemCount?: number;
 };
 
-function LargeSidebarSection({ children }: LargeSidebarSectionProps) {
-  return <>{children}</>;
+function LargeSidebarSection({
+  title,
+  visibleItemCount = Number.POSITIVE_INFINITY,
+  children,
+}: LargeSidebarSectionProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const childrenArray = Children.toArray(children).flat();
+  const visibleChildren = isExpanded
+    ? childrenArray
+    : childrenArray?.slice(0, visibleItemCount);
+  const showExpandBtn = childrenArray?.length > visibleItemCount;
+  const BtnIcon = isExpanded ? ChevronUp : ChevronDown;
+  return (
+    <div>
+      {title && <div className="ml-4 mt-2 text-lg mb-1">{title}</div>}{" "}
+      {visibleChildren}
+      {showExpandBtn && (
+        <Button
+          onClick={() => setIsExpanded((prev) => !prev)}
+          variant={"ghost"}
+          className="w-full p-3 flex items-center rounded-lg  gap-4"
+        >
+          <BtnIcon className="w-6 h-6" />
+          <div>{isExpanded ? "Show less" : "Show more"}</div>
+        </Button>
+      )}
+    </div>
+  );
 }
 
 type LargeSidebarItemProps = {
   Icon: ElementType;
   title: string;
   url: string;
-  isActive: boolean;
+  isActive?: boolean;
 };
 
 function LargeSidebarItem({
   Icon,
   title,
   url,
-  isActive,
+  isActive = false,
 }: LargeSidebarItemProps) {
   return (
     <a
       href={url}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
-        "w-full p-3 flex items-center rounded-lg , gap-4 justify-start"
+        `w-full p-3 flex items-center rounded-lg  gap-4 ${
+          isActive
+            ? "font-bold bg-neutral-100 hover:bg-secondary-default"
+            : undefined
+        }`
       )}
     >
       <Icon className="w-6 h-6" />
-      <div className="text-ellipsis whitespsace-nowrap overflow-hidden">
+      <div className="text-ellipsis whitespace-nowrap overflow-hidden">
         {title}
       </div>
     </a>
