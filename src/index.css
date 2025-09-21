@@ -8,3 +8,21 @@
   --color-secondary-dark: oklch(0.102 0.022 252.894);
   --color-secondary-dark-hover: oklch(0.2148 0.022 252.894);
 }
+
+
+
+*::-webkit-scrollbar {
+  @apply bg-transparent w-1.5;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-secondary-dark-hover rounded-full;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+}
+
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  @apply bg-secondary-border;
+}
