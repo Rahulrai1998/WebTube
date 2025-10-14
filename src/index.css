@@ -9,7 +9,10 @@
   --color-secondary-dark-hover: oklch(0.2148 0.022 252.894);
 }
 
-
+* {
+  /* for cross-browser compatibility */
+  /* scrollbar-width: thin; */
+}
 
 *::-webkit-scrollbar {
   @apply bg-transparent w-1.5;
