@@ -21,13 +21,7 @@ import {
   ShoppingBag,
   Trophy,
 } from "lucide-react";
-import React, {
-  Children,
-  useState,
-  type ElementType,
-  type JSX,
-  type ReactNode,
-} from "react";
+import { Children, useState, type ElementType, type ReactNode } from "react";
 import Button, { buttonStyles } from "../components/Button";
 import { twMerge } from "tailwind-merge";
 import { playlists, subscriptions } from "../data/sidebar";

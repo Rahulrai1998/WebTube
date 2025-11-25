@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import logo from "../assets/mytube-logo-sm.png"
 import { ArrowLeft, Bell, Menu, Mic, Search, Upload, User } from 'lucide-react'
 import Button, { buttonStyles } from '../components/Button'
